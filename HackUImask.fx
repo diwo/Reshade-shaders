@@ -9,12 +9,14 @@
 #include "ReShade.fxh"
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*
 uniform float BlackMaskPower <
 	ui_category = "Amount";
 	ui_label = "BlackMaskAmount";
 	ui_type = "slider";
 	ui_min = 0.0; ui_max = 2.0; ui_step = 0.1;
 > = 1.0;
+*/
 /*
 
 uniform float ClampMax <
@@ -55,7 +57,7 @@ void PS_HackUIRestore(float4 pos : SV_Position, float2 texcoord : TEXCOORD, out 
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+/*
 void PS_HackUICut(float4 pos : SV_Position, float2 texcoord : TEXCOORD, out float4 color : SV_Target)
 {
 	float4 GameScreen = tex2D(HackUIMask_Sampler, texcoord).a ;
@@ -64,13 +66,13 @@ void PS_HackUICut(float4 pos : SV_Position, float2 texcoord : TEXCOORD, out floa
 	color.a = GameScreen.a * BlackMaskPower  ;
 
 }
-
+*/
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //////////////////////////////////////////////
 
-technique HackUIMask <
-	ui_tooltip = "Keep UI";
+technique HackUIMask_Keep <
+	ui_tooltip = "Keep UI - Move to top";
 	enabled = true;
 >
 {
@@ -85,8 +87,8 @@ technique HackUIMask <
 }
 
 //////////////////////////////////////////////
-technique HackUIRestore <
-	ui_tooltip = "Restore UI";
+technique HackUI_Restore <
+	ui_tooltip = "Restore UI - Move to bottom";
 	enabled = true;
 >
 {
@@ -103,6 +105,7 @@ technique HackUIRestore <
 	}
 }
 //////////////////////////////////////////////
+/*
 technique HackUICut <
 	ui_tooltip = "black mask,prevent UI from affecting other fx";
 	enabled = true;
@@ -121,4 +124,5 @@ technique HackUICut <
 		
 	}
 }
+*/
  
